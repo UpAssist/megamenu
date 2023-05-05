@@ -4,7 +4,9 @@ icon: globe
 
 # UpAssist Mega Menu
 
-Render a node based mega menu on your Neos website.
+!!! 
+🚀 Add a node based mega menu to your Neos website with ease and usability in mind
+!!!
 
 ## What does it do?
 This package provides a way to add a mega menu to your Neos website.
