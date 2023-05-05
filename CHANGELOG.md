@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/UpAssist/megamenu/compare/0.1.3...0.1.4) (2023-05-05)
+
+
+### Bug Fixes
+
+* small inconsistencies ([e075a67](https://github.com/UpAssist/megamenu/commit/e075a670a5e4690738e08dbccb5218a5d792d711))
+
 ### [0.1.3](https://github.com/UpAssist/megamenu/compare/0.1.2...0.1.3) (2023-05-05)
 
 ### [0.1.2](https://github.com/UpAssist/megamenu/compare/0.1.1...0.1.2) (2023-05-05)
