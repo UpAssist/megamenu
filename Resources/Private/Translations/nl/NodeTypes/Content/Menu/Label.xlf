@@ -6,7 +6,10 @@
         <source>Label</source>
         <target>Label</target>
       </trans-unit>
-
+      <trans-unit id="properties.text.ui.inline.editorOptions.placeholder">
+        <source>Enter label</source>
+        <target>Voer label in</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

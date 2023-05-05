@@ -8,6 +8,7 @@ UpAssist.MegaMenu:Content.Menu.Column:
     icon: 'fas fa-columns'
   constraints:
     nodeTypes:
-      '*': false
+      'Neos.Neos:Content': true
+      'UpAssist.MegaMenu:Content.Menu.Column': false
       'UpAssist.MegaMenu:Content.Menu.Label': true
       'UpAssist.MegaMenu:Content.Menu.Item': true

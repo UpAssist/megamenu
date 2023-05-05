@@ -11,6 +11,21 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
   itemLabel = ''
   content = null
   renderer = UpAssist.MegaMenu:ExtendedRenderer {
+    classList = Neos.Fusion:DataStructure {
+      1 = 'menu__item'
+      2 = 'menu--has-sub'
+      2.@if.hasContent = ${props.content}
+      3 = Neos.Fusion:Case {
+        currentPage {
+          condition = ${documentNode.identifier == Neos.Link.convertUriToObject(props.item, node).identifier}
+          renderer = 'menu__item--active'
+        }
+        default {
+          condition = true
+          renderer = 'menu__item--normal'
+        }
+      }
+    }
     item.@process.convert = Neos.Fusion:Case {
       singleHash {
         condition = ${!String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
@@ -18,13 +33,14 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
           inBackend {
             condition = ${node.context.inBackend}
             renderer = afx`
-                <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</span>
+              <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</span>
             `
           }
           default {
             condition = ${true}
             renderer = afx`
-                <a href={props.item} title={String.firstLetterToUpperCase(String.replace(props.item, '#'))}>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</a>
+              <a href={props.item}
+                 title={String.firstLetterToUpperCase(String.replace(props.item, '#'))}>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</a>
             `
           }
         }
@@ -42,13 +58,13 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
             condition = ${true}
             renderer = Neos.Fusion:Component {
               uri = Neos.Neos:NodeUri {
-                node = ${Neos.Link.convertUriToObject(props.item, site)}
+                node = ${Neos.Link.convertUriToObject(props.item, node)}
                 @process.append = ${value + '#' + String.split(props.item, '#')[1]}
               }
               title = ${props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}
               renderer = afx`
                 <a href={props.uri} title={props.title}>{props.title}</a>
-                `
+              `
             }
           }
         }
@@ -59,26 +75,21 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
           inBackend {
             condition = ${node.context.inBackend}
             renderer = afx`
-                <span>{props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, site).label}</span>
+              <span>{props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, node).label}</span>
             `
           }
           default {
             condition = true
             renderer = afx`
-              <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, site)}>
-                {props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, site).label}
+              <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, node)}>
+                {props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, node).label}
               </Neos.Neos:NodeLink>
             `
           }
         }
       }
     }
-    classList = Neos.Fusion:DataStructure {
-      1 = 'menu__item'
-      2 = 'is-multiple'
-      2.@if.hasContent = ${props.content}
-      3 = ${props.item.identifier && q(documentNode).parents('#' + props.item.identifier).get(0) ? 'menu__item--active' : 'menu__item--normal'}
-    }
+
     renderer = afx`
       <span class={props.classList}>
         {props.item}
