@@ -1,0 +1,8 @@
+// With this Fusion object as renderer in a Neos.Fusion:Component
+// it is possible to create private calculated properties
+// See: https://discuss.neos.io/t/alternative-to-renderer-context-private/5473
+prototype(UpAssist.MegaMenu:ExtendedRenderer) < prototype(Neos.Fusion:Component) {
+  @apply.props = ${props}
+  attributes = Neos.Fusion:DataStructure
+  renderer = ''
+}

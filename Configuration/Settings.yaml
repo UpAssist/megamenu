@@ -1,0 +1,17 @@
+Neos:
+  Neos:
+    userInterface:
+      translation:
+        autoInclude:
+          UpAssist.MegaMenu:
+            - '*'
+      editPreviewModes:
+        menu:
+          isEditingMode: true
+          isPreviewMode: false
+          fusionRenderingPath: menuContent
+          title: 'Menu'
+          position: end
+    fusion:
+      autoInclude:
+        UpAssist.MegaMenu: true

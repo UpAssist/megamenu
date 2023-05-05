@@ -1,0 +1,11 @@
+UpAssist.MegaMenu:Collection.Menu:
+  superTypes:
+    Neos.Neos:ContentCollection: true
+    UpAssist.MegaMenu:Mixin.MenuContent: true
+  ui:
+    label: i18n
+    icon: 'fas fa-list'
+  constraints:
+    nodeTypes:
+      '*': false
+      'UpAssist.MegaMenu:Content.Menu.Item': true

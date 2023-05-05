@@ -1,0 +1,10 @@
+UpAssist.MegaMenu:Mixin.Menu:
+  abstract: true
+  childNodes:
+    menu:
+      type: 'UpAssist.MegaMenu:Collection.Menu'
+      constraints:
+        nodeTypes:
+          '*': false
+          'UpAssist.MegaMenu:Content.Menu.Item': true
+      position: start

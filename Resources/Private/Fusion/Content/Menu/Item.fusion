@@ -1,0 +1,11 @@
+prototype(UpAssist.MegaMenu:Content.Menu.Item) < prototype(Neos.Neos:ContentComponent) {
+  item = ${q(node).property('item')}
+  enableItemLabel = ${q(node).property('enableItemLabel')}
+  itemLabel = Neos.Neos:Editable {
+    property = 'itemLabel'
+  }
+  content = ${q(node).children().get()}
+  renderer = UpAssist.MegaMenu:Component.Molecule.Menu.Item {
+    @apply.props = ${props}
+  }
+}

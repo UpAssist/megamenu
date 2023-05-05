@@ -1,0 +1,14 @@
+include: **/*.fusion
+
+menuContent = Neos.Neos:Page {
+  head.stylesheets {
+    neos = afx`<link rel="stylesheet" media="screen" href={StaticResource.uri('Neos.Neos', 'Public/Styles/RawContentMode.css')} />`
+    menu = afx`<link rel="stylesheet" media="screen" href={StaticResource.uri('UpAssist.MegaMenu', 'Public/css/neos.css')} />`
+  }
+  body = afx`
+    <section class="menuContent">
+      <h1>Menu</h1>
+      <UpAssist.MegaMenu:Collection.Menu attributes.class.2='menu--previewmode'/>
+    </section>
+  `
+}

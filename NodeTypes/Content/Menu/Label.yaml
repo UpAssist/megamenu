@@ -1,0 +1,17 @@
+UpAssist.MegaMenu:Content.Menu.Label:
+  superTypes:
+    UpAssist.MegaMenu:Mixin.MenuContent: true
+  ui:
+    label: i18n
+    icon: 'fas fa-tag'
+  properties:
+    text:
+      type: string
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: i18n
+            autoparagraph: false
+            formatting: { }
+            linking: { }

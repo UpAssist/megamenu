@@ -1,0 +1,21 @@
+{
+    "description": "A Mega Menu implementation for Neos",
+    "type": "neos-package",
+    "name": "upassist/megamenu",
+    "require": {
+        "neos/flow": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "UpAssist\\MegaMenu\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "UpAssist.MegaMenu"
+        }
+    },
+    "suggest": {
+        "flownative/anchorlinks": "Links to anchors"
+    }
+}
