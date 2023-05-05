@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/UpAssist/megamenu/compare/0.1.1...0.1.2) (2023-05-05)
+
+
+### Features
+
+* add Retype ([0169f48](https://github.com/UpAssist/megamenu/commit/0169f48d25a9a7460aa449f190050c0240d91d0b))
+
 ### [0.1.1](https://github.com/UpAssist/megamenu/compare/0.1.0...0.1.1) (2023-05-05)
 
 
