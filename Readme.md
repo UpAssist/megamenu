@@ -15,7 +15,7 @@ menu items, and optionally labels and columns.
 ### PreviewMode
 This package comes with a previewMode for easier editing the menu.
 
-![](Images/previewmode.png)
+![](Documentation/Images/previewmode.png)
 
 ## Installation
 Add the package to your Site package.
