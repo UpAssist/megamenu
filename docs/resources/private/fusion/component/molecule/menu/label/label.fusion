@@ -1,0 +1,12 @@
+prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Label) < prototype(Neos.Fusion:Component) {
+  @propTypes {
+    text = ${PropTypes.string}
+  }
+
+  text = ''
+
+  renderer = UpAssist.MegaMenu:ExtendedRenderer {
+    renderer = afx`
+      <div class="menu__label">{props.text}</div>`
+  }
+}

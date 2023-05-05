@@ -1,0 +1,7 @@
+prototype(UpAssist.MegaMenu:Content.Menu.Column) < prototype(Neos.Neos:ContentCollection) {
+    tagName = 'span'
+    attributes.class = Neos.Fusion:DataStructure {
+            1 = 'menu__item'
+            2 = 'menu__item--normal'
+        }
+}

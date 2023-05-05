@@ -8,7 +8,8 @@
     "release:patch": "npx standard-version -t '' -r patch && git push --follow-tags",
     "release:minor": "npx standard-version -t '' -r minor && git push --follow-tags",
     "release:major": "npx standard-version -t '' -r major && git push --follow-tags",
-    "release": "yarn release:patch"
+    "release": "yarn docs && yarn release:patch",
+    "docs": "retype build"
   },
   "repository": {
     "type": "git",

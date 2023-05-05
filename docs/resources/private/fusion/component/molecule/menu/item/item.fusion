@@ -1,0 +1,91 @@
+prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusion:Component) {
+  @propTypes {
+    item = ${PropTypes.any}
+    enableItemLabel = ${PropTypes.boolean}
+    itemLabel = ${PropTypes.string}
+    content = ${PropTypes.any}
+  }
+
+  item = null
+  enableItemLabel = false
+  itemLabel = ''
+  content = null
+  renderer = UpAssist.MegaMenu:ExtendedRenderer {
+    item.@process.convert = Neos.Fusion:Case {
+      singleHash {
+        condition = ${!String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
+        renderer = Neos.Fusion:Case {
+          inBackend {
+            condition = ${node.context.inBackend}
+            renderer = afx`
+                <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</span>
+            `
+          }
+          default {
+            condition = ${true}
+            renderer = afx`
+                <a href={props.item} title={String.firstLetterToUpperCase(String.replace(props.item, '#'))}>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</a>
+            `
+          }
+        }
+      }
+      nodeWithHash {
+        condition = ${String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
+        renderer = Neos.Fusion:Case {
+          inBackend {
+            condition = ${node.context.inBackend}
+            renderer = afx`
+              <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}</span>
+            `
+          }
+          default {
+            condition = ${true}
+            renderer = Neos.Fusion:Component {
+              uri = Neos.Neos:NodeUri {
+                node = ${Neos.Link.convertUriToObject(props.item, site)}
+                @process.append = ${value + '#' + String.split(props.item, '#')[1]}
+              }
+              title = ${props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}
+              renderer = afx`
+                <a href={props.uri} title={props.title}>{props.title}</a>
+                `
+            }
+          }
+        }
+      }
+      default {
+        condition = ${true}
+        renderer = Neos.Fusion:Case {
+          inBackend {
+            condition = ${node.context.inBackend}
+            renderer = afx`
+                <span>{props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, site).label}</span>
+            `
+          }
+          default {
+            condition = true
+            renderer = afx`
+              <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, site)}>
+                {props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, site).label}
+              </Neos.Neos:NodeLink>
+            `
+          }
+        }
+      }
+    }
+    classList = Neos.Fusion:DataStructure {
+      1 = 'menu__item'
+      2 = 'is-multiple'
+      2.@if.hasContent = ${props.content}
+      3 = ${props.item.identifier && q(documentNode).parents('#' + props.item.identifier).get(0) ? 'menu__item--active' : 'menu__item--normal'}
+    }
+    renderer = afx`
+      <span class={props.classList}>
+        {props.item}
+        <nav class="menu menu--sub" @if={props.content}>
+          <Neos.Neos:ContentCollectionRenderer>{props.content}</Neos.Neos:ContentCollectionRenderer>
+        </nav>
+      </span>
+    `
+  }
+}

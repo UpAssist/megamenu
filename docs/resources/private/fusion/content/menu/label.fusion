@@ -1,0 +1,9 @@
+prototype(UpAssist.MegaMenu:Content.Menu.Label) < prototype(Neos.Neos:ContentComponent) {
+    text = Neos.Neos:Editable {
+        property = 'text'
+    }
+
+    renderer = UpAssist.MegaMenu:Component.Molecule.Menu.Label {
+        @apply.props = ${props}
+    }
+}

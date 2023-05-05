@@ -42,3 +42,7 @@ Next run the node repair command to create the proper childNode.
 ```
 
 Finish by implementing your styles.
+
+## Optional
+This menu is set up using Fusion AFX. If you want to override the implementation in your project, you are
+completely free to do so.
