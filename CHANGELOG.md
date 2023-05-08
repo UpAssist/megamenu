@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/UpAssist/megamenu/compare/0.1.5...0.1.6) (2023-05-08)
+
+
+### Features
+
+* add handler component ([66a1e4f](https://github.com/UpAssist/megamenu/commit/66a1e4f684063ee143565017cc0b320295ca3d87))
+
+
+### Bug Fixes
+
+* small inconsistencies in nodetype definitions ([a63ec7b](https://github.com/UpAssist/megamenu/commit/a63ec7be92384ff347d16a79428d2954877ebb98))
+
 ### [0.1.5](https://github.com/UpAssist/megamenu/compare/0.1.4...0.1.5) (2023-05-05)
 
 ### [0.1.4](https://github.com/UpAssist/megamenu/compare/0.1.3...0.1.4) (2023-05-05)
