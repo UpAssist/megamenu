@@ -1,0 +1,9 @@
+prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Handler) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <span class="menu__handler">
+          <span class="menu__handler-line line--1"></span>
+          <span class="menu__handler-line line--2"></span>
+          <span class="menu__handler-line line--3"></span>
+        </span>
+    `
+}
