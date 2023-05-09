@@ -93,7 +93,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
     renderer = afx`
       <span class={props.classList}>
         {props.item}
-        <nav class="menu--sub" @if={props.content}>
+        <nav class="menu_sub" @if={props.content}>
           <Neos.Neos:ContentCollectionRenderer>{props.content}</Neos.Neos:ContentCollectionRenderer>
         </nav>
       </span>
