@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.7](https://github.com/UpAssist/megamenu/compare/0.1.6...0.1.7) (2023-05-09)
+
+
+### Bug Fixes
+
+* improper caching setting and improper classname ([5627e99](https://github.com/UpAssist/megamenu/commit/5627e994f2a7277cf18fce763151f66abcc0916d))
+
 ### [0.1.6](https://github.com/UpAssist/megamenu/compare/0.1.5...0.1.6) (2023-05-08)
 
 
