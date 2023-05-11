@@ -59,7 +59,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
             renderer = Neos.Fusion:Component {
               uri = Neos.Neos:NodeUri {
                 node = ${Neos.Link.convertUriToObject(props.item, node)}
-                @process.append = ${(documentNode != site ? value : '') + '#' + String.split(props.item, '#')[1]}
+                @process.append = ${(Neos.Link.convertUriToObject(props.item, node) != documentNode ? value : '') + '#' + String.split(props.item, '#')[1]}
               }
               title = ${props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}
               renderer = afx`
