@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.8](https://github.com/UpAssist/megamenu/compare/0.1.7...0.1.8) (2023-05-11)
+
+
+### Bug Fixes
+
+* handling of hashes on home page are not working well ([3385784](https://github.com/UpAssist/megamenu/commit/33857842f28f66c7598fe026e1cacedae2f1e154))
+
 ### [0.1.7](https://github.com/UpAssist/megamenu/compare/0.1.6...0.1.7) (2023-05-09)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "upassist.megamenu",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "A mega menu package for Neos",
   "main": "index.js",
   "scripts": {
