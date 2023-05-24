@@ -7,6 +7,6 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Label) < prototype(Neos.Fusi
 
   renderer = UpAssist.MegaMenu:ExtendedRenderer {
     renderer = afx`
-      <div class="menu__label">{props.text}</div>`
+      <div class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__label'}>{props.text}</div>`
   }
 }

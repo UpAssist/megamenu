@@ -12,18 +12,18 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
   content = null
   renderer = UpAssist.MegaMenu:ExtendedRenderer {
     classList = Neos.Fusion:DataStructure {
-      1 = 'menu__item'
-      2 = 'menu--has-sub'
+      1 = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item'}
+      2 = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '--has-sub'}
       2.@if.hasContent = ${props.content}
       3 = Neos.Fusion:Case {
         currentPage {
           condition = ${documentNode.identifier == Neos.Link.convertUriToObject(props.item, node).identifier}
-          renderer = 'menu__item--active'
+          renderer = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item--active'}
         }
 
         default {
           condition = true
-          renderer = 'menu__item--normal'
+          renderer = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item--normal'}
         }
       }
     }
@@ -94,7 +94,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
     renderer = afx`
       <span class={props.classList}>
         {props.item}
-        <nav class="menu_sub" @if={props.content}>
+        <nav class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '_sub'} @if={props.content}>
           <Neos.Neos:ContentCollectionRenderer>{props.content}</Neos.Neos:ContentCollectionRenderer>
         </nav>
       </span>
