@@ -15,3 +15,8 @@ Neos:
     fusion:
       autoInclude:
         UpAssist.MegaMenu: true
+
+UpAssist:
+  MegaMenu:
+    defaultClasses:
+      menu: 'menu'

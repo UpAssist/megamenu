@@ -20,6 +20,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
           condition = ${documentNode.identifier == Neos.Link.convertUriToObject(props.item, node).identifier}
           renderer = 'menu__item--active'
         }
+
         default {
           condition = true
           renderer = 'menu__item--normal'

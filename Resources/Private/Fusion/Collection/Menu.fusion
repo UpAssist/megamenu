@@ -1,8 +1,11 @@
 prototype(UpAssist.MegaMenu:Collection.Menu) < prototype(Neos.Neos:ContentCollection) {
   nodePath = ${q(site).children('menu').property('_path')}
   tagName = 'nav'
-  attributes.class = Neos.Fusion:DataStructure {
-    1 = 'menu'
+  attributes {
+    class = Neos.Fusion:DataStructure {
+      1 = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu')}
+    }
+    data-menu = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu')}
   }
 
   @cache {
