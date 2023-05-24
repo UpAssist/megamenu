@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.1](https://github.com/UpAssist/megamenu/compare/0.2.0...0.2.1) (2023-05-24)
+
+
+### Features
+
+* enable consistent base classname change support ([477b294](https://github.com/UpAssist/megamenu/commit/477b29492515be40160066707263623c8010d7b0))
+
 ## [0.2.0](https://github.com/UpAssist/megamenu/compare/0.1.9...0.2.0) (2023-05-24)
 
 
