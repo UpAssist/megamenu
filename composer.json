@@ -13,7 +13,10 @@
     "extra": {
         "neos": {
             "package-key": "UpAssist.MegaMenu"
-        }
+        },
+        "applied-flow-migrations": [
+            "TYPO3.Form-20160601101500"
+        ]
     },
     "suggest": {
         "flownative/anchorlinks": "Links to anchors"
