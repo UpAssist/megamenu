@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/UpAssist/megamenu/compare/0.3.0...0.3.1) (2023-12-05)
+
+
+### Features
+
+* do not render when no items are there ([bf28bf9](https://github.com/UpAssist/megamenu/commit/bf28bf9692d760985d2b89ff9aaffbdd833730be))
+
 ## [0.3.0](https://github.com/UpAssist/megamenu/compare/0.2.1...0.3.0) (2023-07-13)
 
 ### [0.2.1](https://github.com/UpAssist/megamenu/compare/0.2.0...0.2.1) (2023-05-24)
