@@ -1,4 +1,5 @@
 prototype(UpAssist.MegaMenu:Collection.Menu) < prototype(Neos.Neos:ContentCollection) {
+  @if.hasContentOrInBackend = ${q(site).children('menu').children().count() || node.context.inBackend}
   nodePath = ${q(site).children('menu').property('_path')}
   tagName = 'nav'
   attributes {
