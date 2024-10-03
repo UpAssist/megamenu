@@ -1,9 +1,9 @@
 prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Handler) < prototype(Neos.Fusion:Component) {
     renderer = afx`
-        <span class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler'}>
-          <span class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler-line line--1'}></span>
-          <span class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler-line line--2'}></span>
-          <span class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler-line line--3'}></span>
-        </span>
+      <input type="checkbox" id={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler'} class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler'}/>
+      <label for={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__handler'}
+             class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__icon'}>
+        <div class={Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__icon--hamburger'}></div>
+      </label>
     `
 }
