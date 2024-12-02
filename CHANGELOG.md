@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/UpAssist/megamenu/compare/0.4.1...0.5.0) (2024-12-02)
+
+
+### Features
+
+* label for link helper ([b8e659c](https://github.com/UpAssist/megamenu/commit/b8e659cda6f840324c517561a7c77dd16faeed3b)), closes [#1](https://github.com/UpAssist/megamenu/issues/1)
+
 ### [0.4.1](https://github.com/UpAssist/megamenu/compare/0.4.0...0.4.1) (2024-11-06)
 
 ## [0.4.0](https://github.com/UpAssist/megamenu/compare/0.3.1...0.4.0) (2024-10-03)
