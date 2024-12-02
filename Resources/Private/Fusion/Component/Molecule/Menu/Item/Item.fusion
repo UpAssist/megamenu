@@ -70,6 +70,27 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
           }
         }
       }
+      externalLink {
+        condition = ${String.startsWith(props.item, 'http')}
+        renderer = Neos.Fusion:Case {
+          inBackend {
+            condition = ${node.context.inBackend}
+            renderer = afx`
+              <span>{props.enableItemLabel ? props.itemLabel : props.item}</span>
+            `
+          }
+          default {
+            condition = ${true}
+            renderer = Neos.Fusion:Component {
+              uri = ${props.item}
+              title = ${props.enableItemLabel ? props.itemLabel : props.item}
+              renderer = afx`
+                <a href={props.uri} title={props.title} target="_blank">{props.title}</a>
+              `
+            }
+          }
+        }
+      }
       default {
         condition = ${true}
         renderer = Neos.Fusion:Case {
