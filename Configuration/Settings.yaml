@@ -15,7 +15,11 @@ Neos:
     fusion:
       autoInclude:
         UpAssist.MegaMenu: true
-
+  ContentRepository:
+    labelGenerator:
+      eel:
+        defaultContext:
+          UpAssist.LinkHelper: UpAssist\MegaMenu\Fusion\Helper\LinkHelper
 UpAssist:
   MegaMenu:
     defaultClasses:

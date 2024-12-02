@@ -13,7 +13,7 @@ UpAssist.MegaMenu:Content.Menu.Item:
       groups:
         general:
           label: i18n
-  label: "${Neos.Node.labelForNode(node).properties('itemLabel', 'item')}"
+  label: "${UpAssist.LinkHelper.labelForLink(node)}"
   properties:
     item:
       type: string
