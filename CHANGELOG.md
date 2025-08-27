@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/UpAssist/megamenu/compare/0.5.1...1.0.0) (2025-08-27)
+
+
+### Features
+
+* neos9 compat ([b6d74d7](https://github.com/UpAssist/megamenu/commit/b6d74d702e27e6c34cdd5d6619269c2830fad5c9))
+
 ### [0.5.1](https://github.com/UpAssist/megamenu/compare/0.5.0...0.5.1) (2024-12-02)
 
 ## [0.5.0](https://github.com/UpAssist/megamenu/compare/0.4.1...0.5.0) (2024-12-02)
