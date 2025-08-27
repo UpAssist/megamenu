@@ -18,11 +18,13 @@ class LinkHelper implements ProtectedContextAwareInterface
      * @Flow\Inject
      */
     protected LinkingService $linkingService;
+    #[\Neos\Flow\Annotations\Inject]
+    protected \Neos\Neos\Domain\NodeLabel\NodeLabelGeneratorInterface $nodeLabelGenerator;
 
     /**
      * @throws NodeException
      */
-    public function labelForLink(NodeInterface $node = null): string
+    public function labelForLink(\Neos\ContentRepository\Core\Projection\ContentGraph\Node $node = null): string
     {
         if($node !== null) {
             if ($node->getProperty('enableItemLabel') && $node->getProperty('itemLabel')) {
@@ -30,11 +32,11 @@ class LinkHelper implements ProtectedContextAwareInterface
             }
 
             if (str_starts_with($node->getProperty('item'), 'node://')) {
-                /** @var NodeInterface $itemNode */
+                /** @var \Neos\ContentRepository\Core\Projection\ContentGraph\Node $itemNode */
                 $itemNode = $this->linkingService->convertUriToObject($node->getProperty('item'), $node);
 
                 if ($itemNode) {
-                    return $itemNode->getLabel();
+                    return $this->nodeLabelGenerator->getLabel($itemNode);
                 }
             }
 

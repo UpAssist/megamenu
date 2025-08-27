@@ -1,4 +1,4 @@
-UpAssist.MegaMenu:Mixin.Menu:
+'UpAssist.MegaMenu:Mixin.Menu':
   abstract: true
   childNodes:
     menu:

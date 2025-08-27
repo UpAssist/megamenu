@@ -1,6 +1,6 @@
-UpAssist.MegaMenu:Content.Menu.Label:
+'UpAssist.MegaMenu:Content.Menu.Label':
   superTypes:
-    UpAssist.MegaMenu:Mixin.MenuContent: true
+    'UpAssist.MegaMenu:Mixin.MenuContent': true
   ui:
     label: i18n
     icon: 'fas fa-tag'
@@ -13,5 +13,5 @@ UpAssist.MegaMenu:Content.Menu.Label:
           editorOptions:
             placeholder: i18n
             autoparagraph: false
-            formatting: { }
-            linking: { }
+            formatting: {  }
+            linking: {  }

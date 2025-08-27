@@ -1,4 +1,4 @@
-UpAssist.MegaMenu:Mixin.MenuContent:
+'UpAssist.MegaMenu:Mixin.MenuContent':
   abstract: true
   superTypes:
     'Neos.Neos:Content': true

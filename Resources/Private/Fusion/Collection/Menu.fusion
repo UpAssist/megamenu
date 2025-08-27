@@ -1,6 +1,7 @@
+// DONE 9.0 migration: Line 4: !! You very likely need to rewrite "q(VARIABLE).property("_path")" to "Neos.Node.path(VARIABLE)". We did not auto-apply this migration because we cannot be sure whether the variable is a Node.
 prototype(UpAssist.MegaMenu:Collection.Menu) < prototype(Neos.Neos:ContentCollection) {
-  @if.hasContentOrInBackend = ${q(site).children('menu').children().count() || node.context.inBackend}
-  nodePath = ${q(site).children('menu').property('_path')}
+  @if.hasContentOrInBackend = ${q(site).children('menu').children().count() || renderingMode.isEdit}
+  @context.node = ${Neos.Node.nearestContentCollection(site, 'menu')}
   tagName = 'nav'
   attributes {
     class = Neos.Fusion:DataStructure {
@@ -12,8 +13,8 @@ prototype(UpAssist.MegaMenu:Collection.Menu) < prototype(Neos.Neos:ContentCollec
   @cache {
     mode = 'cached'
     entryIdentifier {
-      node = ${node}
-      documentNode = ${documentNode}
+      node = ${Neos.Caching.entryIdentifierForNode(node)}
+      documentNode = ${Neos.Caching.entryIdentifierForNode(documentNode)}
     }
     entryTags {
       1 = ${Neos.Caching.nodeTag(node)}

@@ -1,7 +1,7 @@
-UpAssist.MegaMenu:Content.Menu.Column:
+'UpAssist.MegaMenu:Content.Menu.Column':
   superTypes:
-    Neos.Neos:ContentCollection: true
-    UpAssist.MegaMenu:Mixin.MenuContent: true
+    'Neos.Neos:ContentCollection': true
+    'UpAssist.MegaMenu:Mixin.MenuContent': true
   ui:
     label: i18n
     icon: 'fas fa-columns'

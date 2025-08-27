@@ -1,7 +1,7 @@
-UpAssist.MegaMenu:Content.Menu.Item:
+'UpAssist.MegaMenu:Content.Menu.Item':
   superTypes:
-    Neos.Neos:ContentCollection: true
-    UpAssist.MegaMenu:Mixin.MenuContent: true
+    'Neos.Neos:ContentCollection': true
+    'UpAssist.MegaMenu:Mixin.MenuContent': true
   constraints:
     nodeTypes:
       '*': false
@@ -13,7 +13,7 @@ UpAssist.MegaMenu:Content.Menu.Item:
       groups:
         general:
           label: i18n
-  label: "${UpAssist.LinkHelper.labelForLink(node)}"
+  label: '${UpAssist.LinkHelper.labelForLink(node)}'
   properties:
     item:
       type: string
@@ -26,7 +26,7 @@ UpAssist.MegaMenu:Content.Menu.Item:
         help:
           message: i18n
       validation:
-        Neos.Neos/Validation/NotEmptyValidator: {}
+        Neos.Neos/Validation/NotEmptyValidator: {  }
     enableItemLabel:
       type: boolean
       ui:

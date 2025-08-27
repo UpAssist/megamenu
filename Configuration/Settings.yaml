@@ -10,7 +10,7 @@ Neos:
           isEditingMode: true
           isPreviewMode: false
           fusionRenderingPath: menuContent
-          title: 'Menu'
+          title: Menu
           position: end
     fusion:
       autoInclude:
@@ -23,4 +23,4 @@ Neos:
 UpAssist:
   MegaMenu:
     defaultClasses:
-      menu: 'menu'
+      menu: menu

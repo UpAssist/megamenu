@@ -1,3 +1,6 @@
+// DONE 9.0 migration: Line 23: You may need to rewrite "VARIABLE.identifier" to "VARIABLE.aggregateId". We did not auto-apply this migration because we cannot be sure whether the variable is a Node.
+// DONE 9.0 migration: Line 102: You very likely need to rewrite "VARIABLE.label" to "Neos.Node.label(VARIABLE)". We did not auto-apply this migration because we cannot be sure whether the variable is a Node.
+// DONE 9.0 migration: Line 109: You very likely need to rewrite "VARIABLE.label" to "Neos.Node.label(VARIABLE)". We did not auto-apply this migration because we cannot be sure whether the variable is a Node.
 prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusion:Component) {
   @propTypes {
     item = ${PropTypes.any}
@@ -17,7 +20,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
       2.@if.hasContent = ${props.content}
       3 = Neos.Fusion:Case {
         currentPage {
-          condition = ${documentNode.identifier == Neos.Link.convertUriToObject(props.item, node).identifier}
+          condition = ${documentNode.aggregateId == Neos.Link.convertUriToObject(props.item, node).aggregateId}
           renderer = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item--active'}
         }
 
@@ -32,7 +35,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
         condition = ${!String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
         renderer = Neos.Fusion:Case {
           inBackend {
-            condition = ${node.context.inBackend}
+            condition = ${renderingMode.isEdit}
             renderer = afx`
               <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</span>
             `
@@ -50,7 +53,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
         condition = ${String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
         renderer = Neos.Fusion:Case {
           inBackend {
-            condition = ${node.context.inBackend}
+            condition = ${renderingMode.isEdit}
             renderer = afx`
               <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}</span>
             `
@@ -74,7 +77,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
         condition = ${String.startsWith(props.item, 'http')}
         renderer = Neos.Fusion:Case {
           inBackend {
-            condition = ${node.context.inBackend}
+            condition = ${renderingMode.isEdit}
             renderer = afx`
               <span>{props.enableItemLabel ? props.itemLabel : props.item}</span>
             `
@@ -95,16 +98,16 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
         condition = ${true}
         renderer = Neos.Fusion:Case {
           inBackend {
-            condition = ${node.context.inBackend}
+            condition = ${renderingMode.isEdit}
             renderer = afx`
-              <span>{props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, node).label}</span>
+              <span>{props.enableItemLabel ? props.itemLabel : Neos.Node.label(Neos.Link.convertUriToObject(props.item, node))}</span>
             `
           }
           default {
             condition = true
             renderer = afx`
               <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, node)}>
-                {props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, node).label}
+                {props.enableItemLabel ? props.itemLabel : Neos.Node.label(Neos.Link.convertUriToObject(props.item, node))}
               </Neos.Neos:NodeLink>
             `
           }
