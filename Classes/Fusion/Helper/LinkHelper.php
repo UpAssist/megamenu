@@ -2,10 +2,10 @@
 
 namespace UpAssist\MegaMenu\Fusion\Helper;
 
-use Neos\ContentRepository\Domain\Model\NodeInterface;
-use Neos\ContentRepository\Exception\NodeException;
+use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Annotations as Flow;
+use Neos\Neos\Domain\NodeLabel\NodeLabelGeneratorInterface;
 use Neos\Neos\Service\LinkingService;
 
 /**
@@ -13,39 +13,51 @@ use Neos\Neos\Service\LinkingService;
  */
 class LinkHelper implements ProtectedContextAwareInterface
 {
-    /**
-     * @var LinkingService
-     * @Flow\Inject
-     */
+    #[Flow\Inject]
     protected LinkingService $linkingService;
-    #[\Neos\Flow\Annotations\Inject]
-    protected \Neos\Neos\Domain\NodeLabel\NodeLabelGeneratorInterface $nodeLabelGenerator;
 
-    /**
-     * @throws NodeException
-     */
-    public function labelForLink(\Neos\ContentRepository\Core\Projection\ContentGraph\Node $node = null): string
+    #[Flow\Inject]
+    protected NodeLabelGeneratorInterface $nodeLabelGenerator;
+
+    public function labelForLink(Node $node = null): string
     {
-        if($node !== null) {
-            if ($node->getProperty('enableItemLabel') && $node->getProperty('itemLabel')) {
-                return (string)$node->getProperty('itemLabel');
-            }
-
-            if (str_starts_with($node->getProperty('item'), 'node://')) {
-                /** @var \Neos\ContentRepository\Core\Projection\ContentGraph\Node $itemNode */
-                $itemNode = $this->linkingService->convertUriToObject($node->getProperty('item'), $node);
-
-                if ($itemNode) {
-                    return $this->nodeLabelGenerator->getLabel($itemNode);
-                }
-            }
-
-            if (str_starts_with($node->getProperty('item'), 'http')) {
-                return $node->getProperty('item');
-            }
+        if ($node === null) {
+            return 'Enter a value';
         }
 
-        return 'Enter a value';
+        $item = (string)($node->getProperty('item') ?? '');
+
+        if ($node->getProperty('enableItemLabel') && $node->getProperty('itemLabel')) {
+            return (string)$node->getProperty('itemLabel');
+        }
+
+        if ($item === '') {
+            return 'Enter a value';
+        }
+
+        if (str_starts_with($item, 'node://')) {
+            try {
+                $itemNode = $this->linkingService->convertUriToObject($item, $node);
+            } catch (\Throwable $e) {
+                $itemNode = null;
+            }
+
+            if ($itemNode instanceof Node) {
+                return $this->nodeLabelGenerator->getLabel($itemNode);
+            }
+
+            return 'Enter a value';
+        }
+
+        if (str_starts_with($item, 'http')) {
+            return $item;
+        }
+
+        if (str_starts_with($item, '#')) {
+            return ucfirst(ltrim($item, '#'));
+        }
+
+        return $item;
     }
 
     public function allowsCallOfMethod($methodName)

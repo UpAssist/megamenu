@@ -106,9 +106,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
           default {
             condition = true
             renderer = afx`
-              <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, node)}>
-                {props.enableItemLabel ? props.itemLabel : Neos.Node.label(Neos.Link.convertUriToObject(props.item, node))}
-              </Neos.Neos:NodeLink>
+              <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, node)} content={props.enableItemLabel ? props.itemLabel : Neos.Node.label(Neos.Link.convertUriToObject(props.item, node))} />
             `
           }
         }

@@ -15,7 +15,6 @@ Neos:
     fusion:
       autoInclude:
         UpAssist.MegaMenu: true
-  ContentRepository:
     labelGenerator:
       eel:
         defaultContext:
