@@ -20,7 +20,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
       2.@if.hasContent = ${props.content}
       3 = Neos.Fusion:Case {
         currentPage {
-          condition = ${documentNode.aggregateId == Neos.Link.convertUriToObject(props.item, node).aggregateId}
+          condition = ${props.item && Neos.Link.convertUriToObject(props.item, node) && documentNode.aggregateId == Neos.Link.convertUriToObject(props.item, node).aggregateId}
           renderer = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item--active'}
         }
 
@@ -31,6 +31,12 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
       }
     }
     item.@process.convert = Neos.Fusion:Case {
+      empty {
+        condition = ${!props.item}
+        renderer = afx`
+          <span>{props.enableItemLabel ? props.itemLabel : ''}</span>
+        `
+      }
       singleHash {
         condition = ${!String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
         renderer = Neos.Fusion:Case {
