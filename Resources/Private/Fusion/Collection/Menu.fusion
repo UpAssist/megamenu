@@ -17,6 +17,7 @@ prototype(UpAssist.MegaMenu:Collection.Menu) < prototype(Neos.Neos:ContentCollec
     }
     entryTags {
       1 = ${Neos.Caching.nodeTag(node)}
+      2 = ${Neos.Caching.descendantOfTag(node)}
     }
   }
 }

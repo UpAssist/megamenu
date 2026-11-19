@@ -10,6 +10,19 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
   enableItemLabel = false
   itemLabel = ''
   content = null
+
+  @private {
+    // Resolve node:// and asset:// links once, in the context of the menu item node.
+    // Neos.Neos:NodeLink overrides the "node" context variable, so resolving inside it uses the wrong context node.
+    targetUri = ${props.item && (String.startsWith(props.item, 'node://') || String.startsWith(props.item, 'asset://')) ? String.split(props.item, '#')[0] : null}
+    target = ${private.targetUri ? Neos.Link.convertUriToObject(private.targetUri, node) : null}
+    targetNode = ${private.target && Type.instance(private.target, 'Neos\\ContentRepository\\Domain\\Model\\NodeInterface') ? private.target : null}
+    targetAsset = ${private.target && Type.instance(private.target, 'Neos\\Media\\Domain\\Model\\AssetInterface') ? private.target : null}
+    assetUri = ${private.targetAsset ? Neos.Link.resolveAssetUri(private.targetUri) : null}
+    targetLabel = ${private.targetNode ? private.targetNode.label : (private.targetAsset ? (private.targetAsset.title || private.targetAsset.resource.filename) : '')}
+    label = ${props.enableItemLabel && props.itemLabel ? props.itemLabel : private.targetLabel}
+  }
+
   renderer = UpAssist.MegaMenu:ExtendedRenderer {
     classList = Neos.Fusion:DataStructure {
       1 = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item'}
@@ -17,7 +30,7 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
       2.@if.hasContent = ${props.content}
       3 = Neos.Fusion:Case {
         currentPage {
-          condition = ${documentNode.identifier == Neos.Link.convertUriToObject(props.item, node).identifier}
+          condition = ${private.targetNode && documentNode.identifier == private.targetNode.identifier}
           renderer = ${Configuration.setting('UpAssist.MegaMenu.defaultClasses.menu') + '__item--active'}
         }
 
@@ -28,26 +41,32 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
       }
     }
     item.@process.convert = Neos.Fusion:Case {
+      empty {
+        condition = ${!props.item}
+        renderer = afx`
+          <span>{props.enableItemLabel ? props.itemLabel : ''}</span>
+        `
+      }
       singleHash {
-        condition = ${!String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
+        condition = ${!String.startsWith(props.item, 'node://') && !String.startsWith(props.item, 'asset://') && String.indexOf(props.item, '#') >= 0}
         renderer = Neos.Fusion:Case {
           inBackend {
             condition = ${node.context.inBackend}
             renderer = afx`
-              <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</span>
+              <span>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}</span>
             `
           }
           default {
             condition = ${true}
             renderer = afx`
               <a href={props.item}
-                 title={String.firstLetterToUpperCase(String.replace(props.item, '#'))}>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.replace(props.item, '#'))}</a>
+                 title={String.firstLetterToUpperCase(String.split(props.item, '#')[1])}>{props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}</a>
             `
           }
         }
       }
       nodeWithHash {
-        condition = ${String.startsWith(props.item, 'node://') && String.indexOf(props.item, '#') > 0}
+        condition = ${private.targetNode && String.indexOf(props.item, '#') > 0}
         renderer = Neos.Fusion:Case {
           inBackend {
             condition = ${node.context.inBackend}
@@ -59,8 +78,8 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
             condition = ${true}
             renderer = Neos.Fusion:Component {
               uri = Neos.Neos:NodeUri {
-                node = ${Neos.Link.convertUriToObject(props.item, node)}
-                @process.append = ${(Neos.Link.convertUriToObject(props.item, node) != documentNode ? value : '') + '#' + String.split(props.item, '#')[1]}
+                node = ${private.targetNode}
+                @process.append = ${(private.targetNode.identifier != documentNode.identifier ? value : '') + '#' + String.split(props.item, '#')[1]}
               }
               title = ${props.enableItemLabel ? props.itemLabel : String.firstLetterToUpperCase(String.split(props.item, '#')[1])}
               renderer = afx`
@@ -91,21 +110,61 @@ prototype(UpAssist.MegaMenu:Component.Molecule.Menu.Item) < prototype(Neos.Fusio
           }
         }
       }
-      default {
-        condition = ${true}
+      nodeLink {
+        condition = ${private.targetNode}
         renderer = Neos.Fusion:Case {
           inBackend {
             condition = ${node.context.inBackend}
             renderer = afx`
-              <span>{props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, node).label}</span>
+              <span>{private.label}</span>
             `
           }
           default {
             condition = true
             renderer = afx`
-              <Neos.Neos:NodeLink node={Neos.Link.convertUriToObject(props.item, node)}>
-                {props.enableItemLabel ? props.itemLabel : Neos.Link.convertUriToObject(props.item, node).label}
-              </Neos.Neos:NodeLink>
+              <Neos.Neos:NodeLink node={private.targetNode} content={private.label} />
+            `
+          }
+        }
+      }
+      assetLink {
+        condition = ${private.targetAsset}
+        renderer = Neos.Fusion:Case {
+          inBackend {
+            condition = ${node.context.inBackend}
+            renderer = afx`
+              <span>{private.label}</span>
+            `
+          }
+          default {
+            condition = true
+            renderer = afx`
+              <a href={private.assetUri} title={private.label} target="_blank">{private.label}</a>
+            `
+          }
+        }
+      }
+      unresolved {
+        // node:// or asset:// target that no longer exists or is not visible: render the label without a link
+        condition = ${private.targetUri}
+        renderer = afx`
+          <span>{private.label}</span>
+        `
+      }
+      default {
+        // Any other URI (mailto:, tel:, relative paths)
+        condition = ${true}
+        renderer = Neos.Fusion:Case {
+          inBackend {
+            condition = ${node.context.inBackend}
+            renderer = afx`
+              <span>{props.enableItemLabel && props.itemLabel ? props.itemLabel : props.item}</span>
+            `
+          }
+          default {
+            condition = true
+            renderer = afx`
+              <a href={props.item} title={props.enableItemLabel && props.itemLabel ? props.itemLabel : props.item}>{props.enableItemLabel && props.itemLabel ? props.itemLabel : props.item}</a>
             `
           }
         }
