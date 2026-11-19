@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://github.com/UpAssist/megamenu/compare/0.5.1...0.5.2) (2026-11-19)
+
+
+### Bug Fixes
+
+* never break page rendering on unresolvable menu links: links to deleted or hidden pages render as a label, asset, `mailto:`, `tel:` and relative links render as links
+* `#anchor` items render as anchor links
+* the menu updates on the frontend when menu items change (DescendantOf cache tag)
+* PHP 8.4: explicit nullable parameter in `LinkHelper::labelForLink()`
+* require `neos/neos` and `neos/flow` `^8.3` instead of `*`
+
 ### [0.5.1](https://github.com/UpAssist/megamenu/compare/0.5.0...0.5.1) (2024-12-02)
 
 ## [0.5.0](https://github.com/UpAssist/megamenu/compare/0.4.1...0.5.0) (2024-12-02)
