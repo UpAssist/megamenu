@@ -22,7 +22,7 @@ class LinkHelper implements ProtectedContextAwareInterface
     /**
      * @throws NodeException
      */
-    public function labelForLink(NodeInterface $node = null): string
+    public function labelForLink(?NodeInterface $node = null): string
     {
         if($node !== null) {
             if ($node->getProperty('enableItemLabel') && $node->getProperty('itemLabel')) {
