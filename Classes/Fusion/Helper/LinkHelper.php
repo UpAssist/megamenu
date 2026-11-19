@@ -5,6 +5,7 @@ namespace UpAssist\MegaMenu\Fusion\Helper;
 use Neos\ContentRepository\Core\Projection\ContentGraph\Node;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Flow\Annotations as Flow;
+use Neos\Media\Domain\Model\AssetInterface;
 use Neos\Neos\Domain\NodeLabel\NodeLabelGeneratorInterface;
 use Neos\Neos\Service\LinkingService;
 
@@ -19,7 +20,7 @@ class LinkHelper implements ProtectedContextAwareInterface
     #[Flow\Inject]
     protected NodeLabelGeneratorInterface $nodeLabelGenerator;
 
-    public function labelForLink(Node $node = null): string
+    public function labelForLink(?Node $node = null): string
     {
         if ($node === null) {
             return 'Enter a value';
@@ -44,6 +45,20 @@ class LinkHelper implements ProtectedContextAwareInterface
 
             if ($itemNode instanceof Node) {
                 return $this->nodeLabelGenerator->getLabel($itemNode);
+            }
+
+            return 'Enter a value';
+        }
+
+        if (str_starts_with($item, 'asset://')) {
+            try {
+                $asset = $this->linkingService->convertUriToObject($item, $node);
+            } catch (\Throwable $e) {
+                $asset = null;
+            }
+
+            if ($asset instanceof AssetInterface) {
+                return $asset->getTitle() ?: $asset->getResource()->getFilename();
             }
 
             return 'Enter a value';
