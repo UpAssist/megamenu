@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # No npm or composer entries: the package has no JS dependencies and only requires Neos itself.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: 0.x
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        update-types: [minor, patch]

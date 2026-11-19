@@ -1,6 +1,7 @@
 {
     "description": "A Mega Menu implementation for Neos",
     "type": "neos-package",
+    "license": "MIT",
     "name": "upassist/megamenu",
     "require": {
         "neos/flow": "^9.0",
